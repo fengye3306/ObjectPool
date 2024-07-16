@@ -4,7 +4,7 @@
 #include <ObjectPool/ObjectPool.hpp>
 #include <ObjectPool/allocator/stack_allocator.hpp>
 
-const int ObjectPool_Max_Size = 10;
+const int ObjectPool_Max_Size = 1;
 
 class Class_Test_Stack{
     typedef 

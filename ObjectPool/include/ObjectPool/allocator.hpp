@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once  
 
 namespace Object{
 
@@ -8,6 +8,6 @@ public:
     
     virtual void* allocator() = 0;          
     virtual void  deallocate(T *p) = 0;
-};
+}; 
 
 }

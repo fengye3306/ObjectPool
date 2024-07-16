@@ -4,7 +4,6 @@
 #include <stdexcept>
 
 namespace Object{
-
 template <typename T, int N> 
 class ArrayAllocator : public Allocator<T>{
 
@@ -21,8 +20,7 @@ public:
             if( false == m_used[i]){
                 m_used[i] = true;
                 return reinterpret_cast<T *> (&m_data[sizeof(T) * i]);
-            }
-            
+            }      
         }
         throw std::bad_alloc(); 
     };             
