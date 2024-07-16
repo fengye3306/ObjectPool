@@ -1,40 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
 project(ObjectPool VERSION 1.0.0 LANGUAGES CXX)
 
-# 查找所有的头文件和源文件
+# 查找所有的头文件
 file(GLOB_RECURSE header_list ./include/*.hpp)
-file(GLOB source_list ./src/*.cpp)
 
-# 添加共享库
-add_library(${PROJECT_NAME} SHARED
-    ${header_list}
-    ${source_list}
-)
+# 添加接口库
+add_library(${PROJECT_NAME} INTERFACE)
 
 # 设置头文件路径
-target_include_directories(${PROJECT_NAME} PUBLIC   
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-# 引入构建目录路径
-target_include_directories(${PROJECT_NAME} PUBLIC  
-    ${CMAKE_CURRENT_BINARY_DIR}
+target_include_directories(${PROJECT_NAME} INTERFACE   
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 # 支持C++11标准
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
+target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_11)
 
 # 安装规则
 include(GNUInstallDirs)
-
-# 安装目标
-install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Targets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
 
 # 安装头文件
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
