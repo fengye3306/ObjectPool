@@ -4,6 +4,20 @@
 #include <stdexcept>
 
 namespace Object{
+
+
+/**
+ * @brief 区块策略
+ * 
+ * 区块策略的产生弥补了其他策略的一个麻烦————内存池大小  
+ * 无论是堆策略、栈策略 本质都只是在查找速度上优化下功夫，其大小在程序启动时就被限制死而固定
+ * 区块策略 我认为其本质更接近链表，因此突破了堆或栈，突破作为容器的限制，其在需要扩容时直接外挂节点 从而扩容
+ * 
+ * 类比一下就是ubuntu系统 我开机后可以外挂硬盘增大的我的外存空间
+ * 
+ * @tparam T  数据类型
+ * @tparam ChunksPerBlock  每次的内存值
+ */
 template <typename T, int ChunksPerBlock> 
 class BlockAllocator : public Allocator<T>{
 
